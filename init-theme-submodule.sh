@@ -13,24 +13,29 @@ abspath(){
 }
 
 # defaults
+
+# Until this script is not upstream, use our fork.
 ##template_repo_url=https://github.com/Helmholtz-AI-Energy/beamer-template-2024.git
 template_repo_url=git@github.com:elcodat/helmholtz-ai-beamer-template.git
+
 submod_dir=hai_beamer_template
 remove=false
+branch=
 this=$(basename $0)
 
 
 usage(){
     cat << EOF
 usage:
-    $this [-r] <talk_dir> [template_repo_url]
+    $this [-r] [-b <branch>] <talk_dir> [template_repo_url]
 
 Initialize this repo as git submodule in another talk repo and set links.
 
-    fonts           -> $submod_dir/fonts
-    helmholtzai.sty -> $submod_dir/helmholtzai.sty
-    logos           -> $submod_dir/logos
-    theme           -> $submod_dir/theme
+    Helmholtz-AI.sty        -> $submod_dir/Helmholtz-AI.sty
+    Helmholtz-AI-poster.sty -> $submod_dir/Helmholtz-AI-poster.sty
+    fonts                   -> $submod_dir/fonts
+    logos                   -> $submod_dir/logos
+    theme                   -> $submod_dir/theme
 
 Also, we try to find beamerfontthemeserif.sty on your machine and set a link to
 it in theme/.
@@ -66,14 +71,18 @@ examples:
 
     Use another repo
         $ /path/to/hai-beamer-template/$this /path/to/my/talk git@github.com:user42/awesome-helmholtz-ai-beamer-template-fork.git
+
+    Use another branch
+        $ /path/to/hai-beamer-template/$this /path/to/my/talk -b my-branch git@github.com:user42/awesome-helmholtz-ai-beamer-template-fork.git
 EOF
 }
 
 
-while getopts hr opt; do
+while getopts hrb: opt; do
     case $opt in
         h) usage; exit 0;;
         r) remove=true;;
+        b) branch=$OPTARG;;
         \?) exit 1;;
     esac
 done
@@ -83,6 +92,9 @@ shift $((OPTIND - 1))
 
 [ $# -eq 1 ] && talk_dir=$1
 [ $# -eq 2 ] && talk_dir=$1 && template_repo_url=$2
+
+add_opts=
+[ -n "$branch" ] && add_opts="$add_opts -b $branch"
 
 talk_dir=$(abspath $talk_dir)
 echo "talk_dir: $talk_dir"
@@ -94,7 +106,7 @@ if ! $remove; then
     if [ -e $submod_dir ]; then
         echo "$submod_dir exists, not adding submodule; delete and re-run script to force add"
     else
-        git submodule add $template_repo_url $submod_dir
+        git submodule add $add_opts $template_repo_url $submod_dir
     fi
 fi
 
