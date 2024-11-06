@@ -36,6 +36,7 @@ Initialize this repo as git submodule in another talk repo and set links.
     fonts                   -> $submod_dir/fonts
     logos                   -> $submod_dir/logos
     theme                   -> $submod_dir/theme
+    titles                  -> $submod_dir/titles
 
 Also, we try to find beamerfontthemeserif.sty on your machine and set a link to
 it in theme/.
@@ -110,7 +111,7 @@ if ! $remove; then
     fi
 fi
 
-for name in logos theme fonts Helmholtz-AI-poster.sty Helmholtz-AI.sty; do
+for name in logos theme fonts titles Helmholtz-AI-poster.sty Helmholtz-AI.sty; do
     if $remove; then
         [ -e $name ] && git rm $name
     else
