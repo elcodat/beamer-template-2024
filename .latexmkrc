@@ -5,7 +5,7 @@ $bibtex_use = 2;
 $pdf_mode = 1;
 
 # --shell-escape b/c of minted package
-# lualatex b/c of font stuff
-$pdflatex = "lualatex -interaction=errorstopmode -file-line-error --synctex=1 -shell-escape %O %S";
+# xelatex b/c of font stuff
+$pdflatex = "xelatex -interaction=errorstopmode -file-line-error -shell-escape %O %S";
 
 push @generated_exts, "bak", "bbl", "run.xml", "nav", "snm", "vrb", "synctex.*"
