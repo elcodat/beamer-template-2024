@@ -108,23 +108,78 @@
 \defbeamertemplate{background}{empty}{}
 \setbeamertemplate{background}[frame]
 
+% regular slide frametitle
+%
+% How to define a bool setting "bla":
+%
+%   % Must be 'ifbla' here, not 'bla'
+%   \newif\ifbla
+%
+%   % usage in conditional
+%   \ifbla
+%       ...
+%   \else
+%       ...
+%   \fi
+%
+%   % plain usage, set to true or false
+%   \blatrue
+%   \blafalse
+%
+%   % shortcut for users, toggle default
+%   \blafalse
+%   \newcommand{\bla}{\blatrue}
+%   \newcommand{\usebla}{\blatrue}
+%   \newcommand{\enablebla}{\blatrue}
+%   ...
+%
+%   \blatrue
+%   \newcommand{\nobla}{\blafalse}
+%   \newcommand{\disablebla}{\blafalse}
+%   ...
+\newif\ifhgfusenormalframetitle
+\hgfusenormalframetitlefalse
+\newcommand{\hgfusenormalframetitle}{\hgfusenormalframetitletrue}
+\newlength{\frametitleboxheight}
 \defbeamertemplate{frametitle}{frame}{%
-    \begin{beamercolorbox}[
-        wd=\paperwidth,
-        ht=3.2em,
-        leftskip=0.8cm
-    ]{frametitle}
+    \ifhgfusenormalframetitle
         \ifx\insertframesubtitle\empty%
-            \strut\LARGE\hermann{\insertframetitle}\strut
+            \setlength{\frametitleboxheight}{2.1em}
         \else %
-            \strut\large\hermann{\insertframetitle}\strut\par
-            \vspace{-0.4em}
-            \usebeamercolor[hgflightblue]{framesubtitle}\strut\small\insertframesubtitle\strut
+            \setlength{\frametitleboxheight}{3.0em}
         \fi %
-    \end{beamercolorbox}
+        \begin{beamercolorbox}[
+            wd=\paperwidth,
+            ht=\frametitleboxheight,
+            leftskip=0.8cm
+        ]{frametitle}
+            \ifx\insertframesubtitle\empty%
+                \strut\insertframetitle\strut
+            \else %
+                \strut\insertframetitle\strut\par
+                \vspace{-0.4em}
+                \usebeamercolor[hgflightblue]{framesubtitle}\strut\small\insertframesubtitle\strut
+            \fi %
+        \end{beamercolorbox}
+    \else
+        \begin{beamercolorbox}[
+            wd=\paperwidth,
+            ht=3.2em,
+            leftskip=0.8cm
+        ]{frametitle}
+            \ifx\insertframesubtitle\empty%
+                \strut\LARGE\hermann{\insertframetitle}\strut
+            \else %
+                \strut\large\hermann{\insertframetitle}\strut\par
+                \vspace{-0.4em}
+                \usebeamercolor[hgflightblue]{framesubtitle}\strut\small\insertframesubtitle\strut
+            \fi %
+        \end{beamercolorbox}
+    \fi
 }
 \defbeamertemplate{frametitle}{empty}{}
 \setbeamertemplate{frametitle}[frame]
+
 
 \defbeamertemplate{footline}{frame}{%
     \begin{beamercolorbox}[
