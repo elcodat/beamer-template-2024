@@ -8,7 +8,6 @@ all: $(main)
 preview: $(main)
 	latexmk -pvc $<
 
-
 # Cleanup
 clean: _restclean
 	latexmk -c
