@@ -22,24 +22,18 @@ submod_dir=hai_beamer_template
 remove=false
 branch=
 this=$(basename $0)
-
+link_items="logos theme fonts titles Helmholtz-AI-poster.sty Helmholtz-AI.sty"
 
 usage(){
     cat << EOF
 usage:
     $this [-r] [-b <branch>] <talk_dir> [template_repo_url]
 
-Initialize this repo as git submodule in another talk repo and set links.
+Initialize this repo as git submodule ($submod_dir) in another talk repo and
+set links:
 
-    Helmholtz-AI.sty        -> $submod_dir/Helmholtz-AI.sty
-    Helmholtz-AI-poster.sty -> $submod_dir/Helmholtz-AI-poster.sty
-    fonts                   -> $submod_dir/fonts
-    logos                   -> $submod_dir/logos
-    theme                   -> $submod_dir/theme
-    titles                  -> $submod_dir/titles
-
-Also, we try to find beamerfontthemeserif.sty on your machine and set a link to
-it in theme/.
+    for name in $link_items:
+        name -> $submod_dir/name
 
 This script will not create commits. After you ran it, manually do
 
@@ -111,11 +105,11 @@ if ! $remove; then
     fi
 fi
 
-for name in logos theme fonts titles Helmholtz-AI-poster.sty Helmholtz-AI.sty; do
+for name in $link_items; do
     if $remove; then
         [ -e $name ] && git rm $name
     else
-        [ -e $name ] || ln -vs hai_beamer_template/$name $name
+        [ -e $name ] || ln -vs $submod_dir/$name $name
     fi
 done
 
