@@ -120,12 +120,4 @@ if $remove; then
         git rm $submod_dir
     fi
     rm -rfv .git/modules/$submod_dir
-else
-    # This path works on Debian, so probably also Ubuntu. Add more paths to
-    # check if needed or query locate(1).
-    serif_sty_src=/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty
-    serif_sty_tgt=theme/beamerfontthemeserif.sty
-    if [ -e $serif_sty_src ]; then
-        [ -e $serif_sty_tgt ] || ln -vs $serif_sty_src $serif_sty_tgt
-    fi
 fi

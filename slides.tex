@@ -9,13 +9,12 @@
     ]{biblatex}
 \addbibresource{references.bib}
 
-% Use standard TeX math font.
-%
-% Copy or link /path/to/beamerfontthemeserif.sty into theme/, e.g.
-%   cd theme
-%   ln -s /usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemeserif.sty beamerfontthemeserif.sty
-%%\usepackage{lmodern}
-%%\usefonttheme[onlymath]{serif}
+% Standard TeX math font. See also
+%   https://github.com/elcorto/docwatch/blob/a8ea3d386a0db685cab89dee11879a76cc5e10a0/examples/template.yml#L21-L27
+%%\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage[olddefault]{fontsetup}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 
 \title[Short Title]{Super Awesome Project Title}
 \subtitle{Subtitle}
