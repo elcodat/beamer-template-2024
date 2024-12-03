@@ -8,4 +8,4 @@ $pdf_mode = 1;
 # xelatex b/c of font stuff
 $pdflatex = "xelatex -interaction=errorstopmode -file-line-error -shell-escape %O %S";
 
-push @generated_exts, "bak", "bbl", "run.xml", "nav", "snm", "vrb", "synctex.*"
+push @generated_exts, "bak", "bbl*", "run.xml", "nav", "snm", "vrb", "synctex.*"
