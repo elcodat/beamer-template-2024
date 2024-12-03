@@ -16,7 +16,7 @@ abspath(){
 
 # Until this script is not upstream, use our fork.
 ##template_repo_url=https://github.com/Helmholtz-AI-Energy/beamer-template-2024.git
-template_repo_url=git@github.com:elcodat/helmholtz-ai-beamer-template.git
+template_repo_url=https://github.com/elcodat/beamer-template-2024.git
 
 submod_dir=hai_beamer_template
 remove=false
