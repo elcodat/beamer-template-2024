@@ -141,7 +141,10 @@
 \hgfusenormalframetitlefalse
 \newcommand{\hgfusenormalframetitle}{\hgfusenormalframetitletrue}
 \newlength{\frametitleboxheight}
+\newlength{\hgfframetitlesep}
+\setlength{\hgfframetitlesep}{0em}
 \defbeamertemplate{frametitle}{frame}{%
+    \vspace{\hgfframetitlesep}
     \ifhgfusenormalframetitle
         \ifx\insertframesubtitle\empty%
             \setlength{\frametitleboxheight}{2.1em}
